@@ -3,19 +3,19 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../backend/models/product_model.dart';
 import '../../common_widget/loading_widget.dart';
 import '../../common_widget/text_labels/title_heading3_widget.dart';
 import '../../common_widget/text_labels/title_heading4_widget.dart';
 import '../../routes/routes.dart';
 import '../../utils/assets_path.dart';
-import '../../utils/strings.dart';
+import '../add_banner/add_banner_controller.dart';
 import 'home_controller.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
 
   final controller = Get.put(HomeController());
+  final addBannerController = Get.put(AddBannerController(), permanent: true);
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +37,7 @@ class HomeScreen extends StatelessWidget {
           : RefreshIndicator(
               onRefresh: () async {
                 controller.fetchBanners();
-                controller.fetchAllProducts();
+                // controller.fetchAllProducts();
               },
               child: ListView(
                 shrinkWrap: true,
@@ -54,6 +54,9 @@ class HomeScreen extends StatelessWidget {
                             const Text("Banners"),
                             IconButton(
                                 onPressed: () {
+                                  addBannerController.titleController.clear();
+                                  addBannerController.customUid.value = "";
+                                  addBannerController.imageForEdit.value = "";
                                   Get.toNamed(Routes.addBannerScreen);
                                 },
                                 icon:
@@ -122,7 +125,12 @@ class HomeScreen extends StatelessWidget {
                             },
                             icon: const Icon(Icons.delete, color: Colors.red)),
                         IconButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              addBannerController.titleController.text = data.title;
+                              addBannerController.customUid.value = data.id;
+                              addBannerController.imageForEdit.value = data.image;
+                              Get.toNamed(Routes.addBannerScreen);
+                            },
                             icon: const Icon(Icons.edit, color: Colors.green)),
                       ],
                     ),
@@ -136,7 +144,7 @@ class HomeScreen extends StatelessWidget {
 
 
   _product() {
-    SizedBox(
+    return SizedBox(
       height: 150,
       width: 200,
       child: ListView.separated(
