@@ -16,15 +16,18 @@ class AddBannerScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Add Banner"),
+        title: Text(controller.imageForEdit.value.isNotEmpty
+            ? "Update Banner"
+            : "Add Banner"),
       ),
       body: Column(
         children: [
-          ImageWidget(
-            onPicked: (File file) {
-              controller.imageFile = file;
-            },
-          ),
+          Obx(() => ImageWidget(
+                networkImage: controller.imageForEdit.value,
+                onPicked: (File file) {
+                  controller.imageFile = file;
+                },
+              )),
           const SizedBox(
             height: 10,
           ),
@@ -39,8 +42,6 @@ class AddBannerScreen extends StatelessWidget {
           const SizedBox(
             height: 10,
           ),
-
-
           Obx(() => controller.isLoading
               ? const Center(
                   child: CustomLoadingWidget(),
@@ -48,8 +49,12 @@ class AddBannerScreen extends StatelessWidget {
               : Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: ElevatedButton(
-                    onPressed: controller.addBannerAction,
-                    child: const Text("Add Banner"),
+                    onPressed: controller.imageForEdit.value.isNotEmpty
+                        ? controller.updateBannerAction
+                        : controller.addBannerAction,
+                    child: Text(controller.imageForEdit.value.isNotEmpty
+                        ? "Update Banner"
+                        : "Add Banner"),
                   ),
                 )),
         ],

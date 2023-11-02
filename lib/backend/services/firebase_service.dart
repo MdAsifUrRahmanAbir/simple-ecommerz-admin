@@ -63,10 +63,10 @@ class FirebaseServices {
       /// due : delete also image file todo
 
       docRef.delete().then((value) {
-        // final Reference imageRef = _firebaseStorage.ref().child(imagePath);
-        // imageRef.delete().then((_) {
-        //   ToastMessage.success("Banner Deleted Successfully.");
-        // });
+        final Reference imageRef = _firebaseStorage.ref().child(imagePath);
+        imageRef.delete().then((_) {
+          ToastMessage.success("Banner Deleted Successfully.");
+        });
         ToastMessage.success("Banner Deleted Successfully.");
       });
 
@@ -87,6 +87,19 @@ class FirebaseServices {
           .set(map).then((value) => ToastMessage.success("Banner Added Successfully."));
     }catch(e){
       "Error From add banner in firebase services".bgRedConsole;
+      e.toString().redConsole;
+    }
+  }
+
+
+  static Future<void> updateBanner(Map<String, dynamic> map, String uid) async{
+    try{
+      await _fireStore
+          .collection(banners)
+          .doc(uid)
+          .update(map).then((value) => ToastMessage.success("Banner Update Successfully."));
+    }catch(e){
+      "Error From Update banner in firebase services".bgRedConsole;
       e.toString().redConsole;
     }
   }

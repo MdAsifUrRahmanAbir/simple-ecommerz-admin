@@ -57,7 +57,7 @@ class HomeController extends GetxController{
     _isLoading.value = true;
     update();
     try{
-      await FirebaseServices.deleteBanner(id, imagePath).then((value) => fetchBanners());
+      await FirebaseServices.deleteBanner(id, id).then((value) => fetchBanners());
     }catch(e){
       e.toString().redConsole;
     }finally{
