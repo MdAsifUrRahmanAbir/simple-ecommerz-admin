@@ -29,7 +29,7 @@ class HomeController extends GetxController{
       bannerData = (await FirebaseServices.fetchBanner())!;
 
       bannerData.toString().yellowConsole;
-      _fetchAllProducts();
+      fetchAllProducts();
     } catch (e) {
       e.toString().redConsole;
     } finally {
@@ -40,7 +40,7 @@ class HomeController extends GetxController{
 
   /// fetching popular products
   late List<ProductModel> popularProductData;
-  void _fetchAllProducts() async {
+  void fetchAllProducts() async {
     "START FETCHING Popular Product ".bgGreenConsole;
 
     try {

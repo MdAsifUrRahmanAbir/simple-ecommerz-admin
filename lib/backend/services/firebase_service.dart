@@ -50,7 +50,7 @@ class FirebaseServices {
 
       return bannerList;
     }catch(e){
-      "Error From fetch banner in firebase services".bgRedConsole;
+      "Error From fetch Popular Product in firebase services".bgRedConsole;
       e.toString().redConsole;
       return null;
     }
@@ -87,6 +87,17 @@ class FirebaseServices {
           .set(map).then((value) => ToastMessage.success("Banner Added Successfully."));
     }catch(e){
       "Error From add banner in firebase services".bgRedConsole;
+      e.toString().redConsole;
+    }
+  }
+  static Future<void> addPopularProduct(Map<String, dynamic> map, String uid) async{
+    try{
+      await _fireStore
+          .collection(popularProducts)
+          .doc(uid)
+          .set(map).then((value) => ToastMessage.success("Popular Product Added Successfully."));
+    }catch(e){
+      "Error From add Popular Product in firebase services".bgRedConsole;
       e.toString().redConsole;
     }
   }

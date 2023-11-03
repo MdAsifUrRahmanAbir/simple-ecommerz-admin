@@ -70,9 +70,10 @@ class HomeScreen extends StatelessWidget {
                           children: [
                             const Text("Products"),
                             IconButton(
-                                onPressed: () {},
-                                icon:
-                                    const Icon(Icons.add, color: Colors.black)),
+                                onPressed: () {
+                                  Get.toNamed(Routes.addPopularProductScreen);
+                                },
+                                icon: const Icon(Icons.add, color: Colors.black)),
                           ],
                         ),
                         _product(),
@@ -145,8 +146,8 @@ class HomeScreen extends StatelessWidget {
 
   _product() {
     return SizedBox(
-      height: 150,
-      width: 200,
+      height: 200,
+      width: 250,
       child: ListView.separated(
         shrinkWrap: true,
           physics: const BouncingScrollPhysics(),
@@ -158,16 +159,16 @@ class HomeScreen extends StatelessWidget {
                 //controller.goToDetailsScreen(data, context);
               },
               child: Container(
-                height: 150,
-                width: 200,
+                height: 200,
+                width: 250,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Stack(
                   children: [
                     SizedBox(
-                      height: 150,
-                      width: 200,
+                      height: 200,
+                      width: 250,
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(10),
                         child: FadeInImage(
@@ -178,52 +179,88 @@ class HomeScreen extends StatelessWidget {
                       ),
                     ),
                     Column(
-                      mainAxisAlignment: MainAxisAlignment.end,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Container(
-                            height: 50,
-                            alignment: Alignment.center,
-                            padding: const EdgeInsets.all(5),
-                            decoration: BoxDecoration(
-                                borderRadius: const BorderRadius.only(
-                                  bottomLeft: Radius.circular(10),
-                                  bottomRight: Radius.circular(10),
-                                ),
-                                color: Theme.of(context)
-                                    .primaryColor
-                                    .withOpacity(.7)),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                TitleHeading4Widget(
-                                  text: data.name,
-                                  color: Colors.white,
-                                ),
-                                Column(
-                                  children: [
-                                    TitleHeading3Widget(
-                                      text: data.haveDiscount
-                                          ? "${data.discountPrice.toStringAsFixed(2)} ${data.currency}"
-                                          : "${data.price.toStringAsFixed(2)} ${data.currency}",
-                                      color: Colors.black87,
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Container(
+                                height: 50,
+                                alignment: Alignment.center,
+                                padding: const EdgeInsets.all(5),
+                                decoration: BoxDecoration(
+                                    borderRadius: const BorderRadius.only(
+                                      bottomLeft: Radius.circular(10),
+                                      bottomRight: Radius.circular(10),
                                     ),
-                                    Visibility(
-                                        visible: data.haveDiscount,
-                                        child: Text(
-                                          "${data.price.toStringAsFixed(2)} ${data.currency}",
-                                          style: const TextStyle(
-                                              decoration:
-                                              TextDecoration.lineThrough,
-                                              fontSize: 12.0,
-                                              color: Colors.red,
-                                              fontWeight: FontWeight.bold),
-                                        ))
+                                    color: Theme.of(context)
+                                        .primaryColor
+                                        .withOpacity(.7)),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    TitleHeading4Widget(
+                                      text: data.name,
+                                      color: Colors.white,
+                                    ),
+                                    Column(
+                                      children: [
+                                        TitleHeading3Widget(
+                                          text: data.haveDiscount
+                                              ? "${data.discountPrice.toStringAsFixed(2)} ${data.currency}"
+                                              : "${data.price.toStringAsFixed(2)} ${data.currency}",
+                                          color: Colors.black87,
+                                        ),
+                                        Visibility(
+                                            visible: data.haveDiscount,
+                                            child: Text(
+                                              "${data.price.toStringAsFixed(2)} ${data.currency}",
+                                              style: const TextStyle(
+                                                  decoration:
+                                                  TextDecoration.lineThrough,
+                                                  fontSize: 12.0,
+                                                  color: Colors.red,
+                                                  fontWeight: FontWeight.bold),
+                                            ))
+                                      ],
+                                    ),
                                   ],
-                                ),
-                              ],
-                            ))
+                                ))
+                          ],
+                        ),
+
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Container(
+                              height: 40,
+                              color: Colors.black87,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+
+                                  const Spacer(),
+                                  IconButton(
+                                      onPressed: () {
+                                        controller.deleteBannersFromFirebase(
+                                            data.id, data.image);
+                                      },
+                                      icon: const Icon(Icons.delete, color: Colors.red)),
+                                  IconButton(
+                                      onPressed: () {
+
+                                        Get.toNamed(Routes.addBannerScreen);
+                                      },
+                                      icon: const Icon(Icons.edit, color: Colors.green)),
+                                ],
+                              ),
+                            )
+                          ],
+                        ),
+
                       ],
                     ),
+
                   ],
                 ),
               ),
