@@ -63,6 +63,6 @@ class DefaultFirebaseOptions {
     messagingSenderId: '876623499338',
     projectId: 'e-commerz',
     storageBucket: 'e-commerz.appspot.com',
-    iosBundleId: 'com.example.ecommerzadmin',
+    iosBundleId: 'univers.soft.ecz.admin',
   );
 }
