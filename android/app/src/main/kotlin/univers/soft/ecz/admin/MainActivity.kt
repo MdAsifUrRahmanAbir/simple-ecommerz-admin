@@ -1,4 +1,4 @@
-package com.example.ecommerzadmin
+package univers.soft.ecz.admin
 
 import io.flutter.embedding.android.FlutterActivity
 

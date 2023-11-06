@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 
 import '../screens/add_banner/add_banner_screen.dart';
+import '../screens/add_popular_product/add_popular_product_screen.dart';
 import '../screens/home/home_screen.dart';
 import '../screens/splash/splash_screen.dart';
 import 'routes.dart';
@@ -19,6 +20,10 @@ class Pages {
     GetPage(
       name: Routes.addBannerScreen,
       page: () => AddBannerScreen(),
+    ),
+    GetPage(
+      name: Routes.addPopularProductScreen,
+      page: () => AddPopularProductScreen(),
     ),
   ];
 }
