@@ -45,9 +45,9 @@ class AddPopularProductController extends GetxController{
             "image": url,
             "currency": currencyController.text,
             "description": descriptionController.text,
-            "discountPrice": discountPriceController.text,
-            "haveDiscount" : haveDiscountController.text,
-            "price": priceController.text
+            "discountPrice": double.parse(discountPriceController.text),
+            "haveDiscount" : false,
+            "price": double.parse(priceController.text)
           };
           await FirebaseServices.addPopularProduct(map, customUid.value);
         }

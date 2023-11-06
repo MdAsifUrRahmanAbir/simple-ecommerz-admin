@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:876623499338:android:cecd6c26fe2a6ba8d456b3",
         "android_client_info": {
-          "package_name": "univers.soft.ecz.admin"
+          "package_name": "com.example.ecommerzadmin"
         }
       },
       "oauth_client": [],
@@ -29,6 +29,25 @@
         "mobilesdk_app_id": "1:876623499338:android:0ce281d725b6b64dd456b3",
         "android_client_info": {
           "package_name": "com.example.simple_ecommerc"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD_drlIpQsd1udonSqViolixF7P60JkALs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:876623499338:android:4cf44f3e6cccaf4ed456b3",
+        "android_client_info": {
+          "package_name": "univers.soft.ecz.admin"
         }
       },
       "oauth_client": [],

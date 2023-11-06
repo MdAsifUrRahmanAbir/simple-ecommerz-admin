@@ -147,7 +147,6 @@ class HomeScreen extends StatelessWidget {
   _product() {
     return SizedBox(
       height: 200,
-      width: 250,
       child: ListView.separated(
         shrinkWrap: true,
           physics: const BouncingScrollPhysics(),
