@@ -83,7 +83,7 @@ class AddPopularProductController extends GetxController{
             "currency": currencyController.text,
             "description": descriptionController.text,
             "discountPrice": double.parse(discountPriceController.text),
-            "haveDiscount" : haveDiscountController.text,
+            "haveDiscount" : false,
             "price": double.parse(priceController.text),
           };
           await FirebaseServices.updatePopular(map, customUid.value);
@@ -101,10 +101,10 @@ class AddPopularProductController extends GetxController{
             "currency": currencyController.text,
             "description": descriptionController.text,
             "discountPrice": double.parse(discountPriceController.text),
-            "haveDiscount" : haveDiscountController.text,
+            "haveDiscount" : false,
             "price": double.parse(priceController.text),
           };
-          await FirebaseServices.updateBanner(map, customUid.value);
+          await FirebaseServices.updatePopular(map, customUid.value);
         }
         else{
           ToastMessage.error("Write Banner Title");

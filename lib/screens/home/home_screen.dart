@@ -262,8 +262,9 @@ class HomeScreen extends StatelessWidget {
                                         addPopularController.customUid.value = data.id;
                                         addPopularController.imageForEdit.value = data.image;
                                         //double.parse(priceController.text)= data.price  ;
-                                        addPopularController.haveDiscountController.text = data.haveDiscount ;
-                                        addPopularController.discountPriceController.text = data.discountPrice ;
+                                        addPopularController.haveDiscountController.text = data.haveDiscount.toString() ;
+                                        addPopularController.priceController.text = data.price.toStringAsFixed(2) ;
+                                        addPopularController.discountPriceController.text = data.discountPrice.toStringAsFixed(2) ;
                                         addPopularController.descriptionController.text = data.description;
                                         addPopularController.currencyController.text = data.currency;
 
