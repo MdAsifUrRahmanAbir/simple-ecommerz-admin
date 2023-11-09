@@ -67,7 +67,7 @@ class AddPopularProductController extends GetxController{
 
   }
 
-  void updateBannerAction() async{
+  void updatePopularAction() async{
     _isLoading.value = true;
     update();
     try{
@@ -78,26 +78,31 @@ class AddPopularProductController extends GetxController{
           String url = await FirebaseServices.storeFileToFirebase(imageFile!, customUid.value);
           Map<String, dynamic> map = {
             "id": customUid.value,
-            "title": nameController.text,
+            "name": nameController.text,
             "image": url,
             "currency": currencyController.text,
             "description": descriptionController.text,
-            "discountPrice": discountPriceController.text,
+            "discountPrice": double.parse(discountPriceController.text),
             "haveDiscount" : haveDiscountController.text,
-            "price": priceController.text
+            "price": double.parse(priceController.text),
           };
-          await FirebaseServices.updateBanner(map, customUid.value);
+          await FirebaseServices.updatePopular(map, customUid.value);
         }
         else{
-          ToastMessage.error("Write Banner Title");
+          ToastMessage.error("Write Popular Product All field");
         }
       }
       else{
         if(nameController.text.isNotEmpty){
           Map<String, dynamic> map = {
             "id": customUid.value,
-            "title": nameController.text,
-            "image": imageForEdit.value
+            "name": nameController.text,
+            "image": imageForEdit.value,
+            "currency": currencyController.text,
+            "description": descriptionController.text,
+            "discountPrice": double.parse(discountPriceController.text),
+            "haveDiscount" : haveDiscountController.text,
+            "price": double.parse(priceController.text),
           };
           await FirebaseServices.updateBanner(map, customUid.value);
         }
@@ -113,4 +118,5 @@ class AddPopularProductController extends GetxController{
     }
 
   }
+
 }

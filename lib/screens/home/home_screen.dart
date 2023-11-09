@@ -1,5 +1,6 @@
 
 
+import 'package:ecommerzadmin/screens/add_popular_product/add_popular_product_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -16,6 +17,7 @@ class HomeScreen extends StatelessWidget {
 
   final controller = Get.put(HomeController());
   final addBannerController = Get.put(AddBannerController(), permanent: true);
+  final addPopularController = Get.put(AddPopularProductController(), permanent: true);
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +27,7 @@ class HomeScreen extends StatelessWidget {
           IconButton(
             onPressed: () {
               controller.fetchBanners();
+              controller.fetchAllProducts();
             },
             icon: const Icon(Icons.refresh),
           )
@@ -37,7 +40,7 @@ class HomeScreen extends StatelessWidget {
           : RefreshIndicator(
               onRefresh: () async {
                 controller.fetchBanners();
-                // controller.fetchAllProducts();
+                 controller.fetchAllProducts();
               },
               child: ListView(
                 shrinkWrap: true,
@@ -71,6 +74,14 @@ class HomeScreen extends StatelessWidget {
                             const Text("Products"),
                             IconButton(
                                 onPressed: () {
+                                  addPopularController.currencyController.clear();
+                                  addPopularController.discountPriceController.clear();
+                                  addPopularController.descriptionController.clear();
+                                  addPopularController.haveDiscountController.clear();
+                                  addPopularController.priceController.clear();
+                                  addPopularController.nameController.clear();
+                                  addPopularController.customUid.value = "";
+                                  addPopularController.imageForEdit.value = "";
                                   Get.toNamed(Routes.addPopularProductScreen);
                                 },
                                 icon: const Icon(Icons.add, color: Colors.black)),
@@ -241,14 +252,22 @@ class HomeScreen extends StatelessWidget {
                                   const Spacer(),
                                   IconButton(
                                       onPressed: () {
-                                        controller.deleteBannersFromFirebase(
+                                        controller.deletePopularProductFromFirebase(
                                             data.id, data.image);
                                       },
                                       icon: const Icon(Icons.delete, color: Colors.red)),
                                   IconButton(
                                       onPressed: () {
+                                        addPopularController.nameController.text = data.name;
+                                        addPopularController.customUid.value = data.id;
+                                        addPopularController.imageForEdit.value = data.image;
+                                        //double.parse(priceController.text)= data.price  ;
+                                        addPopularController.haveDiscountController.text = data.haveDiscount ;
+                                        addPopularController.discountPriceController.text = data.discountPrice ;
+                                        addPopularController.descriptionController.text = data.description;
+                                        addPopularController.currencyController.text = data.currency;
 
-                                        Get.toNamed(Routes.addBannerScreen);
+                                        Get.toNamed(Routes.addPopularProductScreen);
                                       },
                                       icon: const Icon(Icons.edit, color: Colors.green)),
                                 ],
