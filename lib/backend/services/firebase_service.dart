@@ -42,13 +42,13 @@ class FirebaseServices {
     try{
       final QuerySnapshot<Map<String, dynamic>> snapshot = await _fireStore.collection(popularProducts).get();
 
-      List<ProductModel> bannerList = snapshot.docs.map((doc) {
+      List<ProductModel> popularProductList = snapshot.docs.map((doc) {
         final data = doc.data();
         return ProductModel.fromJson(data);
       }).toList();
 
 
-      return bannerList;
+      return popularProductList;
     }catch(e){
       "Error From fetch Popular Product in firebase services".bgRedConsole;
       e.toString().redConsole;
@@ -73,6 +73,27 @@ class FirebaseServices {
 
     }catch(e){
       "Error From delete banner in firebase services".bgRedConsole;
+      e.toString().redConsole;
+    }
+  }
+
+  static Future<void> deletePopularProduct(String id, String imagePath)async{
+    try{
+      final DocumentReference docRef = _fireStore.collection(popularProducts).doc(id);
+
+      /// due : delete also image file todo
+
+      docRef.delete().then((value) {
+        final Reference imageRef = _firebaseStorage.ref().child(imagePath);
+        imageRef.delete().then((_) {
+          ToastMessage.success("Popular Product Deleted Successfully.");
+        });
+        ToastMessage.success("Popular Product Deleted Successfully.");
+      });
+
+
+    }catch(e){
+      "Error From delete Popular Product in firebase services".bgRedConsole;
       e.toString().redConsole;
     }
   }
@@ -111,6 +132,18 @@ class FirebaseServices {
           .update(map).then((value) => ToastMessage.success("Banner Update Successfully."));
     }catch(e){
       "Error From Update banner in firebase services".bgRedConsole;
+      e.toString().redConsole;
+    }
+  }
+
+  static Future<void> updatePopular(Map<String, dynamic> map, String uid) async{
+    try{
+      await _fireStore
+          .collection(popularProducts)
+          .doc(uid)
+          .update(map).then((value) => ToastMessage.success("Popular Products Update Successfully."));
+    }catch(e){
+      "Error From Update Popular Products in firebase services".bgRedConsole;
       e.toString().redConsole;
     }
   }
