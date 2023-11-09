@@ -101,7 +101,7 @@ class AddPopularProductScreen extends StatelessWidget {
                   padding: const EdgeInsets.all(8.0),
                   child: ElevatedButton(
                     onPressed: controller.imageForEdit.value.isNotEmpty
-                        ? controller.updateBannerAction
+                        ?controller.updatePopularAction
                         : controller.addPopularProductAction,
                     child: Text(controller.imageForEdit.value.isNotEmpty
                         ? "Update Popular Product"

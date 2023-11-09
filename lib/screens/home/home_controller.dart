@@ -11,6 +11,7 @@ class HomeController extends GetxController{
   void onInit() {
     // TODO: implement onInit
     fetchBanners();
+    fetchAllProducts();
     super.onInit();
   }
 
@@ -58,6 +59,19 @@ class HomeController extends GetxController{
     update();
     try{
       await FirebaseServices.deleteBanner(id, id).then((value) => fetchBanners());
+    }catch(e){
+      e.toString().redConsole;
+    }finally{
+      // _isLoading.value = false;
+      // update();
+    }
+  }
+
+  void deletePopularProductFromFirebase(String id, String imagePath) async{
+    _isLoading.value = true;
+    update();
+    try{
+      await FirebaseServices.deletePopularProduct(id, id).then((value) => fetchAllProducts());
     }catch(e){
       e.toString().redConsole;
     }finally{
